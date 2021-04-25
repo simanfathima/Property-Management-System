@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block title %}My Account{% endblock %}
+{% load static %}
+{% block content %}
+<div
+  class="bg-image"
+  style="
+    background-image: url({% static 'images/tlist.jpg' %});
+    height: 100vh;
+  "
+>
+	<div class="h-50 w-50 container bg-white d-flex align-items-center justify-content-center" style="position:relative;top:200px;margin-left: auto;margin-right: auto;">
+      <div class="text-black mb-0 text-center">
+				   <article class="posts">
+				   <p><b>User Name</b> - {{ user.username }}</p> 
+				   <p><b>Name</b> - {{ user.first_name }} {{ user.last_name }}</p> 
+				   <p><b>Email ID</b> - {{ user.email }}</p> 
+				   <p><b>Joined us on</b> - {{ user.date_joined.date|linebreaksbr }}</p><br><br><br>
+				   <a href="{% url 'logout' %}" class="btn btn-secondary btn-lg active" role="button" aria-pressed="true">logout</a> 
+				   </article>
+			   </div>
+			</div>
+
+	</div>
+
+{% endblock %} 

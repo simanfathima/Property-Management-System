@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div
+  class="bg-image"
+  style="
+    background-image: url({% static 'images/tlist.jpg' %});
+    height: 100vh;
+  "
+>
+  <div class="h-50 w-50 container bg-white d-flex align-items-center justify-content-center" style="position:relative;top:200px;margin-left: auto;margin-right: auto;">
+      <div class="text-black mb-0">
+        {% if user.is_authenticated %}
+        {% if tenant %}
+        {% for tenant in tenant %}
+              <h2 style="text-align:center">Welcome Back <em style="color:orange">{{ tenant.name }}</em>!</a></h2><br><br><br><br>
+		    <a href="{% url 'tenant_detail' pk=tenant.pk %}" class="btn btn-secondary btn-lg active" role="button" aria-pressed="true">Rent Details</a>
+                    <a href="{% url 'myaccount' %} " class="btn btn-secondary btn-lg active" role="button" aria-pressed="true">My Account</a>
+        {%endfor%}
+        {% else %}
+               <h2 style="text-align:center">You are not a registered Tenant!</h2><br><br><br>
+                     <div class="text-center" >
+               <a href="{% url 'logout' %}?next={% url 'tenant_list' %}" class="btn btn-secondary btn-lg active" role="button" aria-pressed="true">logout</a> 
+                     </div>
+        {% endif %}
+        {% else %}
+          <p style="text-align:center">Login to Avail Rent Services</p>
+          <div class="text-center">
+          <a href="{% url 'login' %}?next={% url 'tenant_list' %}" style="color:white;" class="btn btn-success me-2">Login</a>
+          </div>
+        {% endif %}
+      </div>
+    </div>
+</div>
+
+{% endblock %}

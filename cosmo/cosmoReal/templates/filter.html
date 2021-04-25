@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+    <h2 style="position:relative;top:100px;text-align:center">Filter Properties</h2>
+    <form method="POST" class="post-form container" enctype="multipart/form-data" style="position:relative;top:150px">{% csrf_token %}
+        {{ form|crispy }}
+        <button type="submit" class="save btn btn-primary">Submit</button>
+    </form>
+{% endblock %}

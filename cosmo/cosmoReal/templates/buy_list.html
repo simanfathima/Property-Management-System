@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+
+<div style="background-image:url({% static 'images/Cover.jpg' %});">
+<div class="container bg-white" style="position:relative;top:150px;">
+
+<ul class="nav nav-pills justify-content-end" style="font-size:20px;">
+  <li class="nav-item">
+    <a class="nav-link active" href="{% url 'searchbuy' %}">Search</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="{% url 'buyfilter' %}">Filter</a>
+  </li>
+  <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Sort
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+    <a href="{% url 'sortbuy' %}" class="dropdown-item">Least Expensive First</a>
+    <a href="{% url 'sortbuyde' %}" class="dropdown-item">Most Expensive First</a>
+        </div>
+      </li>
+</ul>
+<div>
+
+    
+    {% for buy in buys %}
+   
+<section class="projects-section bg-white" id="projects">
+            <div class="container">
+                <!-- Featured Project Row-->
+                <div class="row align-items-center no-gutters mb-4 mb-lg-5">
+                    <div class="col-xl-8 col-lg-7"><img class="img-fluid mb-3 mb-lg-0" src="{{ buy.image1.url }}" alt="" height="300" width="300" /></div>
+                    <div class="col-xl-4 col-lg-5">
+                        <div class="featured-text text-center text-lg-left">
+                            <h4 class="card-title"><a href="{% url 'buy_detail' pk=buy.pk %}">{{ buy.propid }}</a></h4>
+			    <p class="text-black-50 mb-0">{{ buy.city}}</p>
+                            <p class="text-black-50 mb-0">{{ buy.proptype}}</p>
+                            <p class="text-black-50 mb-0">{{ buy.use}}</p>
+                        </div>
+                    </div>
+                </div>
+</section>
+
+    {% endfor %}
+ </div> 
+</div>  
+{% endblock %}

@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+<div style="position:relative;top:100px">
+<h1 style="text-align:center">Search Page</h1>
+
+<br/>
+<form action="{% url 'searchbuy' %}" method="GET" value="{{request.GET.q}}" style="text-align:center;">
+<input type="text" name="q" value="{{request.GET.q}}" placeholder="Search Property" style="height:30px" />
+<input type="submit" name="submit" value="Search" class="btn btn-primary"/>
+</form>
+</div>
+
+{% if submitbutton == 'Search' and request.GET.q != '' %}
+{% if results %}
+<h1 style="position:relative;top:150px;text-align:center">Results for <b>{{ request.GET.q }}</b></h1>
+<br/><br/>
+
+{% for result in results %}
+
+<section class="projects-section bg-black container" style="position:relative;top:100px" id="projects">
+            <div class="container">
+                <!-- Featured Project Row-->
+                <div class="row align-items-center no-gutters mb-4 mb-lg-5">
+                    <div class="col-xl-8 col-lg-7"><img class="img-fluid mb-3 mb-lg-0" src="{{ result.image1.url }}" alt="" height="300" width="300" /></div>
+                    <div class="col-xl-4 col-lg-5">
+                        <div class="featured-text text-center text-lg-left">
+                            <h4 class="card-title"><a href="{% url 'buy_detail' pk=result.pk %}">{{ result.propid }}</a></h4>
+                            <p class="text-white-50 mb-0">{{result.locality}}</p>
+			    <p class="text-white-50 mb-0">{{result.description}}</p>
+			    <p class="text-white-50 mb-0">{{result.city}}</p>
+			    <p class="text-white-50 mb-0">{{result.use}}</p>
+			    <p class="text-white-50 mb-0">₹{{result.price}}</p>
+                        </div>
+                    </div>
+                </div>
+</section>
+
+{% endfor %}
+{% else %}
+No search results for this query
+{% endif %}
+{% endif %}
+{% endblock %}

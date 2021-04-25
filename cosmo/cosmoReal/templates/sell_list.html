@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% block content %}
+    {% for sell in sells %}
+    <article class="post">
+    <time>posted: {{ sell.posted_date }}</time>
+    <h2><a href="{% url 'sell_detail' pk=sell.pk %}">{{ sell.seller }}</a></h2>
+    <p>{{ sell.description|linebreaksbr }}</p>
+    </article>
+    {% endfor %}
+{% endblock %}

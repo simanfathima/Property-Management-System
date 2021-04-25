@@ -1,0 +1,80 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <article class="post">
+	{% if user.is_authenticated %}
+    <aside class="actions">
+	<a href="{% url 'post_new' %}" style="color:black">Edit Post</a>
+    </aside>
+	{% endif %}
+        <h2>{{ sell.seller }}</h2>
+        <p>{{ sell.description|linebreaksbr }}</p>
+	<p>{{ sell.posted_date }}</p>	
+    </article>
+    <div id="multi-item-example" class="carousel slide carousel-multi-item" data-ride="carousel">
+
+    <!--Controls-->
+    <div class="controls-top">
+      <a class="btn-floating" href="#multi-item-example" data-slide="prev"><i class="fa fa-chevron-left"></i></a>
+      <a class="btn-floating" href="#multi-item-example" data-slide="next"><i class="fa fa-chevron-right"></i></a>
+    </div>
+    <!--/.Controls-->
+
+    <!--Indicators-->
+    <ol class="carousel-indicators">
+      <li data-target="#multi-item-example" data-slide-to="0" class="active"></li>
+      <li data-target="#multi-item-example" data-slide-to="1"></li>
+      <li data-target="#multi-item-example" data-slide-to="2"></li>
+    </ol>
+    <!--/.Indicators-->
+
+    <!--Slides-->
+    <div class="carousel-inner" role="listbox">
+
+      <!--First slide-->
+      <div class="carousel-item active">
+
+        <div class="row">
+          <div class="col-md-4">
+            <div class="card mb-2">
+              <img class="card-img-top" src="{{ sell.image0.url }}" alt="Card image cap">
+              <div class="card-body">
+                <p class="card-text">Image 1</p>
+	
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-4 clearfix d-none d-md-block">
+            <div class="card mb-2">
+              <img class="card-img-top" src="{{ sell.image1.url }}" alt="Card image cap">
+              <div class="card-body">
+                <p class="card-text">Image 2</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-4 clearfix d-none d-md-block">
+            <div class="card mb-2">
+              <img class="card-img-top" src="{{ sell.image2.url }}" alt="Card image cap">
+              <div class="card-body">
+                <p class="card-text">Image 3</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+
+    </div>
+
+
+  </div>
+
+
+
+</div>
+
+    
+{% endblock %}

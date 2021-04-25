@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+{% load static %}
+<div style="background-image:url({% static 'images/Cover.jpg' %});">
+<div class="container" style="position:relative;top:150px;">
+    <section class="projects-section bg-white" id="projects">
+            <div class="container">
+<article class="post">
+	<a href="{% url 'bookappointment' %}" class="btn btn-success btn-lg float-right">Book Appointment</a>
+        <h2><strong style="color: orange;">Property ID:  </strong> {{ rent.propid }}</h2>
+        <p><strong style="color: orange;">Description:  </strong>{{ rent.description|linebreaksbr }}</p>
+	<p><strong style="color: orange;">Area:  </strong>{{ rent.locality|linebreaksbr }}</p>
+	<p><strong style="color: orange;">City:  </strong>{{ rent.city|linebreaksbr }}</p>
+	<p><strong style="color: orange;">Property Type:  </strong>{{ rent.proptype|linebreaksbr }}</p>
+	<p><strong style="color: orange;">Property Use:</strong>  {{ rent.use|linebreaksbr }}</p>
+        <p><strong style="color: orange;">Price:  </strong>₹{{ rent.price|linebreaksbr }}</p>
+	
+    </article>
+
+<div id="multi-item-example" class="carousel slide carousel-multi-item" data-ride="carousel">
+
+
+
+
+    <!--Slides-->
+    <div class="carousel-inner" role="listbox">
+
+      <!--First slide-->
+      <div class="carousel-item active">
+
+        <div class="row">
+          <div class="col-md-4">
+            <div class="card mb-2">
+              <img class="card-img-top" src="{{ rent.image1.url }}" alt="Card image cap" height="300px">
+              <div class="card-body">
+                <h4 class="card-title">{{ rent.propid }}</h4>
+                <p class="card-text">HALL</p>
+	
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-4 clearfix d-none d-md-block">
+            <div class="card mb-2">
+              <img class="card-img-top" src="{{ rent.image2.url }}" alt="Card image cap" height="300px">
+              <div class="card-body">
+                <h4 class="card-title">{{ rent.propid }}</h4>
+                <p class="card-text">KITCHEN</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-4 clearfix d-none d-md-block">
+            <div class="card mb-2">
+              <img class="card-img-top" src="{{ rent.image3.url }}" alt="Card image cap" height="300px">
+              <div class="card-body">
+                <h4 class="card-title">{{ rent.propid }}</h4>
+                <p class="card-text">BEDROOM</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+
+    </div>
+
+
+  </div>
+
+
+
+</div>
+
+
+
+{% endblock %}

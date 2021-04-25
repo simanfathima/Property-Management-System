@@ -1,0 +1,8 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<article class="post container text-center" style="position:relative;top:200px">
+	<h1> PAYMENT FAILED. RETRY </h1>
+        <a href="{% url 'payment' %}" class="btn btn-success btn-lg">retry</a>
+
+{% endblock %}
