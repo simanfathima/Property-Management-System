@@ -4,24 +4,24 @@
 
 <div style="background-image:url({% static 'images/Cover.jpg' %});">
 <div class="container bg-white" style="position:relative;top:150px;">
+<nav class="nav navbar-expand-lg navbar-light" >
+<button class="navbar-toggler navbar-toggler-right btn btn-success" data-toggle="collapse" data-target="#optionnavbar" aria-controls="optionnavbar" aria-expanded="false" aria-label="Toggle navigation">Options
+    <span class="navbar-toggler-icon"></span>
+  </button>
+<div class="collapse navbar-collapse" id="optionnavbar">
+    <div class="navbar-nav ml-auto">
+			<a class="nav-item nav-link" href="{% url 'searchbuy' %}">Search</a></li>
+                        <a class="nav-item nav-link" href="{% url 'buyfilter' %}">Filter</a></li>
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Sort</a></li>
+			<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+		        <a href="{% url 'sortbuy' %}" class="dropdown-item">Least Expensive First</a></li>
+		        <a href="{% url 'sortbuyde' %}" class="dropdown-item">Most Expensive First</a></li>
+			</div>
+                </div>
+            </div>
+        </nav>
 
-<ul class="nav nav-pills justify-content-end" style="font-size:20px;">
-  <li class="nav-item">
-    <a class="nav-link active" href="{% url 'searchbuy' %}">Search</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" href="{% url 'buyfilter' %}">Filter</a>
-  </li>
-  <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Sort
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-    <a href="{% url 'sortbuy' %}" class="dropdown-item">Least Expensive First</a>
-    <a href="{% url 'sortbuyde' %}" class="dropdown-item">Most Expensive First</a>
-        </div>
-      </li>
-</ul>
+
 <div>
 
     
