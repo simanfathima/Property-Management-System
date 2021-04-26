@@ -379,5 +379,20 @@ def rentfilter(request):
         form = FilterForm()
      return render(request, 'filter.html', {'form': form})
         
+def rent_recommend(request,pk):
+    result_list = []
+    rent = get_object_or_404(Rent, pk=pk)
+    rents = Rent.objects.filter(posted_date__lte=timezone.now()).order_by('posted_date')
+    for i in rents:
+       if(i.price-rent.price <= 6000 and i.propid!=rent.propid):
+           result_list.append(i.propid)
+    results= Rent.objects.filter(propid__in=result_list)
+    return render(request, 'rent_list.html', {'rents': results})
+
+
+
+
+
+
 
 

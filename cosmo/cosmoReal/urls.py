@@ -25,6 +25,7 @@ urlpatterns = [
     path('cosmo/book/',views.bookappointment,name='bookappointment'),
     path('cosmo/book/success/',views.success,name='success'),
     path('rent/<int:pk>/', views.rent_detail, name='rent_detail'),
+    path('rent/<int:pk>/recommend', views.rent_recommend, name='rent_recommend'),
     path('tenant/<int:pk>/', views.tenant_detail, name='tenant_detail'),
     path('post/new/', views.post_new, name='post_new'),
     
