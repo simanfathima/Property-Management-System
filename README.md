@@ -21,7 +21,6 @@ Web App Link: [http://simanfathima.pythonanywhere.com](http://simanfathima.pytho
   <h3 align="center">Property Management System</h3>
   
   <p align="center">
-    A Creative Property Management System
     <br />
     <a href="https://github.com/simanfathima/Property-Management-System"><strong>Explore the docs »</strong></a>
     <br />
