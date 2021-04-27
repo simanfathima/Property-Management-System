@@ -95,7 +95,7 @@ This is an example of how to list things you need to use the software and how to
    ```sh
    git clone https://github.com/simanfathima/Property-Management-System.git
    ```
-12. Clone the repo
+12. Install pip
    ```sh
    python -m pip install --upgrade pip
    ```
