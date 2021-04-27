@@ -148,8 +148,8 @@ Project Link: [https://github.com/simanfathima/Property-Management-System](https
 [license-url]: https://github.com/simanfathima/Best-README-Template/blob/master/LICENSE.txt
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 [linkedin-url]: https://linkedin.com/in/simanfathima-s
-[product-screenshot1]: home.png
-[product-screenshot2]: propdetail.png
-[product-screenshot3]: sell.png
-[product-screenshot4]: propservices.png
-[product-screenshot5]: tenant_list.png
+[product-screenshot1]: images/home.png
+[product-screenshot2]: images/propdetail.png
+[product-screenshot3]: images/sell.png
+[product-screenshot4]: images/propservices.png
+[product-screenshot5]: images/tenant_list.png
