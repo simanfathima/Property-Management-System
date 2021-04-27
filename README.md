@@ -49,7 +49,6 @@ Web App Link: [http://simanfathima.pythonanywhere.com](http://simanfathima.pytho
         <li><a href="#installation">Installation</a></li>
       </ul>
     </li>
-    <li><a href="#contact">Contact</a></li>
   </ol>
 </details>
 
@@ -127,8 +126,6 @@ This is an example of how to list things you need to use the software and how to
    ## 127.0.0.1:8000/admin
 
 
-<!-- CONTACT -->
-## Contact
 
 Project Link: [https://github.com/simanfathima/Property-Management-System](https://github.com/simanfathima/Property-Management-System)
 
