@@ -71,8 +71,9 @@ build a positive relationship with their tenants so that all their work can be e
 and effective. This projects aims to develop an online property management system with this
 goal.
 
-This section should list any major frameworks that you built your project using. Leave any add-ons/plugins for the acknowledgements section. Here are a few examples.
+
 * [Bootstrap](https://getbootstrap.com)
+* Django
 
 
 <!-- GETTING STARTED -->
