@@ -8,7 +8,6 @@ from django.conf import settings
 from django.core.mail import EmailMultiAlternatives
 from django.db.models import Q
 
-
 def signup(request):
     if request.method == 'POST':
         form = SignUpForm(request.POST)
@@ -26,8 +25,6 @@ def signup(request):
 def myaccount(request):
     return render(request, 'myaccount.html')
         
-
-
 class HomePageView(TemplateView):
     template_name = 'home.html'
 
@@ -37,7 +34,22 @@ def buy_list(request):
 
 def buy_detail(request,pk):
     buy = get_object_or_404(Buy, pk=pk)
-    return render(request, 'buy_detail.html', {'buy': buy})
+    result_list = []
+    buys = Buy.objects.filter(posted_date__lte=timezone.now()).order_by('posted_date')
+    for i in buys:
+       if(abs(i.price-buy.price) <= 3000000 and i.propid!=buy.propid and buy.city==i.city and buy.use==i.use and len(result_list)<=2):
+           result_list.append(i.propid)
+       if(len(result_list)==0):
+          for i in buys:
+             if(i.propid!=buy.propid and buy.city==i.city and buy.use==i.use and len(result_list)<=2):
+                result_list.append(i.propid)
+          if(len(result_list)==0):
+             for i in buys:
+                if(i.propid!=buy.propid and buy.city==i.city and len(result_list)<=2):
+                   result_list.append(i.propid)
+
+    results= Buy.objects.filter(propid__in=result_list)
+    return render(request, 'buy_detail.html', {'buy': buy,'results':results})
 
 def rent_list(request):
     rents = Rent.objects.filter(posted_date__lte=timezone.now()).order_by('posted_date')
@@ -45,7 +57,22 @@ def rent_list(request):
 
 def rent_detail(request,pk):
     rent = get_object_or_404(Rent, pk=pk)
-    return render(request, 'rent_detail.html', {'rent': rent})
+    result_list = []
+    rents = Rent.objects.filter(posted_date__lte=timezone.now()).order_by('posted_date')
+    for i in rents:
+       if(i.propid!=rent.propid and rent.city==i.city and rent.use==i.use and len(result_list)<=2):
+           result_list.append(i.propid)
+       if(len(result_list)==0):
+          for i in rents:
+             if(i.propid!=rent.propid and rent.city==i.city and rent.use==i.use and len(result_list)<=2):
+                result_list.append(i.propid)
+          if(len(result_list)==0):
+             for i in rents:
+                if(i.propid!=rent.propid and rent.city==i.city and len(result_list)<=2):
+                   result_list.append(i.propid)
+
+    results= Rent.objects.filter(propid__in=result_list)
+    return render(request, 'rent_detail.html', {'rent': rent,'results':results})
 
 def sell_list(request):
     sells = Sell.objects.filter(posted_date__lte=timezone.now()).order_by('posted_date')
@@ -73,44 +100,30 @@ def post_new(request):
 def searchbuy(request):
     if request.method == 'GET':
         query= request.GET.get('q')
-
         submitbutton= request.GET.get('submit')
-
         if query is not None:
             lookups= Q(locality__icontains=query) | Q(description__icontains=query) | Q(city__icontains=query) | Q(use__icontains=query) | Q(proptype__icontains=query)
-
             results= Buy.objects.filter(lookups).distinct()
-
             context={'results': results,'submitbutton': submitbutton}
-
-            return render(request, 'searchbuy.html', context)
-
+            return render(request, 'buy_list.html', context)
         else:
-            return render(request, 'searchbuy.html')
-
+            return render(request, 'buy_list.html')
     else:
-        return render(request, 'searchbuy.html')
+        return render(request, 'buy_list.html')
 
 def searchrent(request):
     if request.method == 'GET':
         query= request.GET.get('q')
-
         submitbutton= request.GET.get('submit')
-
         if query is not None:
             lookups= Q(locality__icontains=query) | Q(description__icontains=query) | Q(city__icontains=query) | Q(use__icontains=query) | Q(proptype__icontains=query)
-
             results= Rent.objects.filter(lookups).distinct()
-
             rentsearch={'results': results,'submitbutton': submitbutton}
-
-            return render(request, 'searchrent.html', rentsearch)
-
+            return render(request, 'rent_list.html', rentsearch)
         else:
-            return render(request, 'searchrent.html')
-
+            return render(request, 'rent_list.html')
     else:
-        return render(request, 'searchrent.html')
+        return render(request, 'rent_list.html')
 
 def tenant_list(request):
         username = None
@@ -139,6 +152,7 @@ def maintenance(request) :
                    maint.save()
                    mail= EmailMultiAlternatives('Maintenance Request Received','Your maintenance request for {issue} has been successfully received!'.format(issue=maint.issues),settings.EMAIL_HOST_USER,[tenant.email])
                    mail.send()
+                   Tenant.objects.filter(name__username=username).update(issues=maint.issues)
                    Tenant.objects.filter(name__username=username).update(request='Pending Requests')
                    return redirect('tenant_list')
             else:
@@ -346,7 +360,7 @@ def rentfilter(request):
                     if(fil.use == None):
                       lookups= Q(city__icontains=fil.city) & Q(proptype__icontains=fil.proptype)
                     else:
-                      lookups = Q(proptype__icontains=fil.proptype) & Q(use__icontains=fil.use) & Q(proptype__icontains=fil.proptype)
+                      lookups = Q(proptype__icontains=fil.proptype) & Q(use__icontains=fil.use) & Q(city__icontains=fil.city)
             
             elif(fil.proptype != None):
                 if(fil.city == None):
@@ -358,7 +372,7 @@ def rentfilter(request):
                     if(fil.use == None):
                       lookups= Q(city__icontains=fil.city) & Q(proptype__icontains=fil.proptype)
                     else:
-                      lookups = Q(proptype__icontains=fil.proptype) & Q(use__icontains=fil.use) & Q(proptype__icontains=fil.proptype)
+                      lookups = Q(proptype__icontains=fil.proptype) & Q(use__icontains=fil.use) & Q(city__icontains=fil.city)
 
             elif(fil.use != None):
                 if(fil.city == None):
@@ -370,24 +384,17 @@ def rentfilter(request):
                     if(fil.use == None):
                       lookups= Q(city__icontains=fil.city) & Q(use__icontains=fil.use)
                     else:
-                      lookups = Q(proptype__icontains=fil.proptype) & Q(use__icontains=fil.use) & Q(proptype__icontains=fil.proptype)
+                      lookups = Q(proptype__icontains=fil.proptype) & Q(use__icontains=fil.use) & Q(city__icontains=fil.city)
+
+
             
 
             results= Rent.objects.filter(lookups)
             return render(request,'rent_list.html',{'rents':results})
      else:
         form = FilterForm()
-     return render(request, 'filter.html', {'form': form})
+     return render(request, 'rent_list.html', {'form': form})
         
-def rent_recommend(request,pk):
-    result_list = []
-    rent = get_object_or_404(Rent, pk=pk)
-    rents = Rent.objects.filter(posted_date__lte=timezone.now()).order_by('posted_date')
-    for i in rents:
-       if(i.price-rent.price <= 6000 and i.propid!=rent.propid):
-           result_list.append(i.propid)
-    results= Rent.objects.filter(propid__in=result_list)
-    return render(request, 'rent_list.html', {'rents': results})
 
 
 

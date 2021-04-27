@@ -1,72 +1,129 @@
 {% extends 'base.html' %}
-{% block content %}
 {% load static %}
-<div style="background-image:url({% static 'images/Cover.jpg' %});">
-<div class="container" style="position:relative;top:150px;">
-    
-    <section class="projects-section bg-white" id="projects">
-            <div class="container">
+{% block content %}
 
-	
+<style>
+div{
+   font-family:raleway;
+}
+li {
+    list-style-type: none; 
+    display : inline;
+    }
+.nav-pills .nav-link.active,
+.nav-pills .show > .nav-link {
+  background-color: orange;
+}
+</style>
 
-    <article class="post">
-	<a href="{% url 'bookappointment' %}" class="btn btn-success btn-lg float-right">Book Appointment</a>
-        <h2><strong style="color: orange;">Property ID:  </strong> {{ buy.propid }}</h2>
-        <p><strong style="color: orange;">Description:  </strong>{{ buy.description|linebreaksbr }}</p>
-	<p><strong style="color: orange;">Area:</strong>  {{ buy.locality|linebreaksbr }}</p>
-	<p><strong style="color: orange;">City:</strong>  {{ buy.city|linebreaksbr }}</p>
-	<p><strong style="color: orange;">Property Type:</strong>  {{ buy.proptype|linebreaksbr }}</p>
-        <p><strong style="color: orange;">Property Use:</strong>  {{ buy.use|linebreaksbr }}</p>
-	<p><strong style="color: orange;">Price:</strong>  ₹{{ buy.price|linebreaksbr }}</p>
-	
-    </article>
-
+<div style="position:relative;top:90px;">
+	<div style="background-image:url({% static 'images/Cover.jpg' %});">
 
 
+		<div class="card container bg-black" >
+			<div class="card-header" style="background-color:black">
+				<ul class="nav float-right" style="position:relative;top:90px;">
+				<li class="nav-item">
+				<a class="nav-link btn btn-success float-right" href="{% url 'bookappointment' %}" >Book Appointment</a>
+				</li>
+				</ul>
+			</div>
 
-    <div id="multi-item-example" class="carousel slide carousel-multi-item" data-ride="carousel">
 
-    <!--Slides-->
-    <div class="carousel-inner" role="listbox">
-      <!--First slide-->
-      <div class="carousel-item active">
-        <div class="row">
-          <div class="col-md-4 mb-3 mb-md-0">
-            <div class="card py-4 h-100">
-              <img class="card-img-top" src="{{ buy.image1.url }}" alt="Card image cap" height="300px">
-              <div class="card-body">
-                <h4 class="card-title">{{ buy.propid }}</h4>
-                <p class="card-text">HALL</p>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-4 mb-3 mb-md-0">
-            <div class="card py-4 h-100">
-              <img class="card-img-top" src="{{ buy.image2.url }}" alt="Card image cap" height="300px">
-              <div class="card-body">
-                <h4 class="card-title">{{ buy.propid }}</h4>
-                <p class="card-text">KITCHEN</p>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-4 mb-3 mb-md-0">
-            <div class="card py-4 h-100">
-              <img class="card-img-top" src="{{ buy.image3.url }}" alt="Card image cap" height="300px">
-              <div class="card-body">
-                <h4 class="card-title">{{ buy.propid }}</h4>
-                <p class="card-text">BEDROOM</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+
+			<div class="card-body">
+
+				<section class="projects-section bg-white" id="projects">
+
+					<div class="container" style="font-family:raleway;">
+						<h2><strong style="color: orange;">Property ID:  </strong> {{ buy.propid }}</h2>
+						<p><strong style="color: orange;">Description:  </strong>{{ buy.description|linebreaksbr }}</p>
+						<p><strong style="color: orange;">Area:  </strong>{{ buy.locality|linebreaksbr }}</p>
+						<p><strong style="color: orange;">City:  </strong>{{ buy.city|linebreaksbr }}</p>
+						<p><strong style="color: orange;">Property Type:  </strong>{{ buy.proptype|linebreaksbr }}</p>
+						<p><strong style="color: orange;">Property Use:</strong>  {{ buy.use|linebreaksbr }}</p>
+						<p><strong style="color: orange;">Price:  </strong>₹{{ buy.price|linebreaksbr }}</p>
+
+					</div>
+
+					<div id="multi-item-example" class="carousel slide carousel-multi-item" data-ride="carousel">
+						<!--Slides-->
+						<div class="carousel-inner" role="listbox">
+
+							<!--First slide-->
+							<div class="carousel-item active">
+
+								<div class="row">
+									<div class="col-md-4 mb-3 mb-md-0">
+										<div class="card py-4 h-100">
+											<img class="card-img-top" src="{{ buy.image1.url }}" alt="Card image cap" height="300px">
+												<div class="card-body">
+												<h4 class="card-title">{{ buy.propid }}</h4>
+												<p class="card-text">LIVING ROOM</p>
+
+												</div>
+											</div>
+										</div>
+
+									<div class="col-md-4 mb-3 mb-md-0">
+										<div class="card py-4 h-100">
+											<img class="card-img-top" src="{{ buy.image2.url }}" alt="Card image cap" height="300px">
+												<div class="card-body">
+												<h4 class="card-title">{{ buy.propid }}</h4>
+												<p class="card-text">KITCHEN</p>
+												</div>
+										</div>
+									</div>
+
+									<div class="col-md-4 mb-3 mb-md-0">
+										<div class="card py-4 h-100">
+											<img class="card-img-top" src="{{ buy.image3.url }}" alt="Card image cap" height="300px">
+												<div class="card-body">
+												<h4 class="card-title">{{ buy.propid }}</h4>
+												<p class="card-text">BEDROOM</p>
+												</div>
+										</div>
+									</div>
+
+								</div>
+							</div>
+						</div>
+					</div>
+				</section>	
+			</div>
+			<div class="card-body"><hr/><hr/>
+				<h1 style="text-align:center;color:white;font-family:raleway">Recommended For You</h1><br><br>
+					<div id="multi-item-example" class="carousel slide carousel-multi-item container" data-ride="carousel">
+											<!--Slides-->
+						<div class="carousel-inner" role="listbox">
+							<!--First slide-->
+							<div class="carousel-item active">
+								<div class="row">
+
+								{% for result in results %}
+									<div class="col-md-4 mb-3 mb-md-0">
+										<div class="card py-4 h-100">
+											<div>
+												<a href="{% url 'buy_detail' pk=result.pk %}">
+												<img class="card-img-top" src="{{ result.image3.url }}" alt="Card image cap" height="300px">
+												</a>
+											</div> 
+											<div class="card-body">
+												<h4 class="card-title">₹{{ result.price }}</h4>
+												<h5 class="card-title">{{ result.city }}</a></h5>
+											</div>
+										</div>
+									</div>
+								{% endfor %}
+								</div>
+							</div>
+						</div>
+					</div>
+			</div>
+		</div>
+				
+	</div>
 </div>
-</div>
-</section>
-</div>
 
 
-</div>
 {% endblock %}

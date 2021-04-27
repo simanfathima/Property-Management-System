@@ -1,16 +1,31 @@
 {% extends 'base.html' %}
-{% block content %}
+{% load crispy_forms_tags %}
 {% load static %}
+{% block content %}
+<style>
+li {
+    list-style-type: none; 
+    display : inline;
+    }
+.nav-pills .nav-link.active,
+.nav-pills .show > .nav-link {
+  background-color: orange;
+}
+</style>
+
+<div style="position:relative;top:90px;">
 <div style="background-image:url({% static 'images/Cover.jpg' %});">
-<div class="container bg-white" style="position:relative;top:150px;">
-<nav class="nav navbar-expand-lg navbar-light" >
+
+
+<div class="card text-center container bg-transparent" >
+  <div class="card-header" style="background-color:black">
+<nav class="nav navbar-expand-lg nav-white"  >
 <button class="navbar-toggler navbar-toggler-right btn btn-success" data-toggle="collapse" data-target="#optionnavbar1" aria-controls="optionnavbar1" aria-expanded="false" aria-label="Toggle navigation">Options
     <span class="navbar-toggler-icon"></span>
   </button>
 <div class="collapse navbar-collapse" id="optionnavbar1">
-    <div class="navbar-nav ml-auto">
-			<a class="nav-item nav-link" href="{% url 'searchrent' %}">Search</a></li>
-                        <a class="nav-item nav-link" href="{% url 'rentfilter' %}">Filter</a></li>
+    <div class="nav nav-pills card-header-pills ml-auto">
+                        <a class="nav-item nav-link active" href="{% url 'rentfilter' %}">Filter</a></li>
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Sort</a></li>
 			<div class="dropdown-menu" aria-labelledby="navbarDropdown">
 		        <a href="{% url 'sortrent' %}" class="dropdown-item">Least Expensive First</a></li>
@@ -19,7 +34,67 @@
                 </div>
             </div>
         </nav>
-<div>
+<form action="{% url 'searchrent' %}" method="GET" value="{{request.GET.q}}" style="text-align:center;">
+<span>
+<input class="text-center" type="text" name="q" value="{{request.GET.q}}" placeholder="Search Property"/>
+<button type="submit" name="submit" style="height:30px;width:20px;" value="Search" class="btn btn-success"></button>
+</span>
+</form>
+
+{% if submitbutton == 'Search' and request.GET.q != '' %}
+	{% if results %}
+		<h1 style="text-align:center;color:orange"><br><br>Results for <b>{{ request.GET.q }}</b></h1>
+		<br/><br/>
+
+		{% for result in results %}
+
+			<section class="projects-section bg-black container" id="projects">
+				    <div class="container">
+					<!-- Featured Project Row-->
+				     <div class="row align-items-center no-gutters mb-4 mb-lg-5">
+					<div class="col-xl-8 col-lg-7"><img class="img-fluid mb-3 mb-lg-0" src="{{ result.image1.url }}" alt="" height="300" width="300" /></div>
+					    <div class="col-xl-4 col-lg-5">
+						<div class="featured-text text-center text-lg-left">
+						    <h4 class="card-title"><a href="{% url 'rent_detail' pk=result.pk %}">{{ result.propid }}</a></h4>
+						    <p class="text-white-50 mb-0">{{result.locality}}</p>
+						    <p class="text-white-50 mb-0">{{result.description}}</p>
+						    <p class="text-white-50 mb-0">{{result.city}}</p>
+						    <p class="text-white-50 mb-0">{{result.use}}</p>
+						    <p class="text-white-50 mb-0">₹{{result.price}}</p>
+						</div>
+					    </div>
+					</div>
+			</section>
+
+		{% endfor %}
+	{% else %}
+		No search results for this query
+	{% endif %}
+{% endif %}
+
+
+</div>
+</div>
+
+
+<div class="card-body">
+{% if form %}
+ <section class="projects-section bg-white d-flex align-items-center justify-content-center" id="projects">
+
+		<form method="POST" class="post-form container" enctype="multipart/form-data" style="text-align:center">{% csrf_token %}
+		 
+			  {% for field in form  %}
+			    	{{ field.errors }}
+			    	<li> {{ field.label_tag }} {{ field }} </li> 
+			  {% endfor %}
+			<div>
+			<br>
+			<br>
+			<button type="submit" class="save btn btn-primary btn-sm">Filter</button>
+			</div>
+		</form>
+</section>
+{% endif %}
 
 
 
@@ -39,7 +114,9 @@
                     </div>
                 </div>
     </section>
+
     {% endfor %}
+
 </div>
 </div>
 {% endblock %}

@@ -2,11 +2,14 @@
 {% load crispy_forms_tags %}
 {% block content %}
 {% load static %}
-<div class="h-75 w-50 container bg-white d-flex align-items-center justify-content-center" style="position:relative;top:200px;margin-left: auto;margin-right: auto;">
-<div class="text-black mb-0">
+<div class="container d-flex align-items-center justify-content-center" style="position:relative;top:200px;margin-left: auto;margin-right: auto;background-image:url({% static 'images/Cover.jpg' %});">
+<div class="text-white mb-0">
 <article class="post">
 <form method="POST" class="post-form" enctype="multipart/form-data">{% csrf_token %}
         {{ form|crispy }}
         <button class="btn btn-success btn-lg float-left">Submit</button>
 </form>
+</article>
+</div>
+</div>
 {% endblock %}
