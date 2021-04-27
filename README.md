@@ -83,7 +83,7 @@ To get a local copy up and running follow these simple example steps.
 
 ### Prerequisites
 
-This is an example of a list of things you need to do use the software
+This is a list of things you need to do to use the software
 * python
   ```sh
   sudo apt install python3
