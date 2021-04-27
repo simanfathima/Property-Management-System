@@ -65,9 +65,9 @@ Web App Link: [http://simanfathima.pythonanywhere.com](http://simanfathima.pytho
 With the current paradigm shift in technological field, there is an urgent need to
 embrace and appreciate the power of technology. Property management system has
 become an important factor in modern society. Hence, there is a need to develop a
-Property management system that can simplify work for landlords and help them
+Property management system that can simplify work for landlords to sell their properties and help them
 build a positive relationship with their tenants so that all their work can be efficient
-and effective. This projects aims to develop an online property management system with this
+and effective. This project aims to develop an online property management system with this
 goal.
 
 
